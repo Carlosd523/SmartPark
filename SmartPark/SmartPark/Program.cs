@@ -45,15 +45,18 @@ class Program
         int tiempo_simulado = 0;
         Boolean ticket_activo_booleano = false;
         int opcion_menu = 0;
+        int vehiculo_actual = 0;
+        string nombre_cliente_actual = "";
+        int minuto_de_entrada = 0;
 
         do
         {
             Console.WriteLine("¿A qué parte del menú se quiere dirigir?" +
-                "\n 1. CREAR TICKET DE ENTRADA" +
-                "\n 2. REGISTRAR SALIDA Y CALCULAR COBRO" +
-                "\n 3. VER ESTADO DE PARQUEO" +
-                "\n 4. SIMULAR PASO DEL TIEMPO" +
-                "\n 5. SALIR");
+                "\n 1 = CREAR TICKET DE ENTRADA" +
+                "\n 2 = REGISTRAR SALIDA Y CALCULAR COBRO" +
+                "\n 3 = VER ESTADO DE PARQUEO" +
+                "\n 4 = SIMULAR PASO DEL TIEMPO" +
+                "\n 5 = SALIR");
             string dato1 = Console.ReadLine()!;
             opcion_menu = int.Parse(dato1);
 
@@ -66,6 +69,39 @@ class Program
             switch (opcion_menu)
             {
                 case 1:
+
+                    int espacios_ocupados = tickets_creados - tickets_cerrados;
+                    if(ticket_activo_booleano == true || espacios_ocupados == capacidad)
+                    {
+                        Console.WriteLine("No se pueden crear tickets en este momento");
+                        continue;
+                    }
+
+                    int vehiculo = 0;
+
+                    do
+                    {
+                        Console.WriteLine("Ingrese el tipo de vehiculo" +
+                            "\n 1 = MOTO" +
+                            "\n 2 = AUTO" +
+                            "\n 3 = PICKUP/SUV");
+                        string dato3 = Console.ReadLine()!;
+                        vehiculo = int.Parse(dato3);
+
+                        if(vehiculo > 3 || vehiculo < 1)
+                        {
+                            Console.WriteLine("Ingrese un número válido");
+                        }
+                    } while (vehiculo > 3 || vehiculo < 1);
+
+                    Console.WriteLine("Ingrese el nombre del cliente");
+                    string nombre_cliente = Console.ReadLine()!;
+
+                    vehiculo_actual = vehiculo;
+                    nombre_cliente_actual = nombre_cliente;
+                    minuto_de_entrada = tiempo_simulado;
+                    ticket_activo_booleano = true;
+                    tickets_creados++;
 
                     Console.WriteLine("Presione Enter para continuar");
                     Console.ReadLine();
