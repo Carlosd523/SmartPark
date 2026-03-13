@@ -67,18 +67,30 @@ class Program
             {
                 case 1:
 
+                    Console.WriteLine("Presione Enter para continuar");
+                    Console.ReadLine();
+                    Console.Clear();
                     break;
 
                 case 2:
 
+                    Console.WriteLine("Presione Enter para continuar");
+                    Console.ReadLine();
+                    Console.Clear();
                     break;
 
                 case 3:
 
+                    Console.WriteLine("Presione Enter para continuar");
+                    Console.ReadLine();
+                    Console.Clear();
                     break;
 
                 case 4:
 
+                    Console.WriteLine("Presione Enter para continuar");
+                    Console.ReadLine();
+                    Console.Clear();
                     break;
             }
         } while (opcion_menu != 5);
