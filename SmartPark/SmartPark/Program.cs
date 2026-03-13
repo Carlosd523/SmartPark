@@ -14,6 +14,7 @@ class Program
 
         string? codigo_turno;
 
+        // Bloque 1 - Datos del operador
         do
         {
             Console.WriteLine("Ingrese su código de turno");
@@ -39,6 +40,8 @@ class Program
             }
         } while (capacidad < 10);
 
+        // Bloque 2 - Inicialización variables
+
         int tickets_creados = 0;
         int tickets_cerrados = 0;
         double dinero = 0;
@@ -48,6 +51,13 @@ class Program
         int vehiculo_actual = 0;
         string nombre_cliente_actual = "";
         int minuto_de_entrada = 0;
+        int minutos_estacionados = 0;
+        int tarifa = 0;
+        int multa_fija = 0;
+        int cliente_vip = 0;
+        double monto_final;
+
+        // Menú - Hecho con ciclo do-while
 
         do
         {
@@ -69,6 +79,8 @@ class Program
             switch (opcion_menu)
             {
                 case 1:
+
+                    // Caso 1 - El operador genera un nuevo ticket
 
                     int espacios_ocupados = tickets_creados - tickets_cerrados;
                     if(ticket_activo_booleano == true || espacios_ocupados == capacidad)
@@ -109,6 +121,90 @@ class Program
                     break;
 
                 case 2:
+
+                    // Caso 2 - El operador cierra un ticket
+
+                    if(ticket_activo_booleano == false)
+                    {
+                        Console.WriteLine("No hay tickets activos");
+                        continue;
+                    }
+
+                    minutos_estacionados = tiempo_simulado - minuto_de_entrada;
+
+                    // Se aplica tarifa
+
+                    switch (vehiculo_actual)
+                    {
+                        case 1:
+                            tarifa = 5;
+                            break;
+
+                        case 2:
+                            tarifa = 10;
+                            break;
+
+                        case 3:
+                            tarifa = 15;
+                            break;
+                    }
+
+                    // Cálculos del monto final
+
+                    if(minutos_estacionados >= 15)
+                    {
+                        int horas = minutos_estacionados / 60;
+
+                        if(minutos_estacionados % 60 > 0)
+                        {
+                            horas = horas + 1;
+                        }
+
+                        if(horas > 6)
+                        {
+                            multa_fija = 25;
+                        }
+                        else
+                        {
+                            multa_fija = 0;
+                        }
+
+                        monto_final = (tarifa * horas) + multa_fija;
+
+                        // 2.1 El cliente indica si es VIP
+
+                        do
+                        {
+                            Console.WriteLine("¿Usted es cliente VIP?" +
+                                "\n 1 = Sí" +
+                                "\n 0 = No");
+                            string dato4 = Console.ReadLine()!;
+                            cliente_vip = int.Parse(dato4);
+                            if(cliente_vip > 1 || cliente_vip < 0)
+                            {
+                                Console.WriteLine("Ingrese un número válido");
+                                continue;
+                            }
+                        } while (cliente_vip > 1 || cliente_vip < 0);
+
+                        if(cliente_vip == 1)
+                        {
+                            monto_final = monto_final * 0.90;
+                        }
+
+                        if(horas > 12)
+                        {
+                            monto_final = monto_final * 1.20;
+                        }
+                    }
+                    else
+                    {
+                        monto_final = 0;
+                    }
+
+                    dinero += monto_final;
+                    tickets_cerrados++;
+                    ticket_activo_booleano = false;
 
                     Console.WriteLine("Presione Enter para continuar");
                     Console.ReadLine();
