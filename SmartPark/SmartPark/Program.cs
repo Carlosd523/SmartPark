@@ -5,7 +5,7 @@ class Program
     {
         // Proyecto #1
         // Carlos Daniel Angulo Campos - Carnet: 1250826
-        // Luis Pedro Martinez Bobadilla - Carnet (Agrega tu carnet)
+        // Luis Pedro Martinez Bobadilla - Carnet 1081126
 
         // Parqueo Inteligente hecho solamente con estructuras cíclicas y repetitivas
 
@@ -212,6 +212,30 @@ class Program
                     break;
 
                 case 3:
+                    //Caso 3 - El operador ve el estado del parqueo
+
+                    Console.WriteLine("Capacidad del parqueo: " + capacidad);
+                    Console.WriteLine();
+
+                    espacios_ocupados = tickets_creados - tickets_cerrados;
+                    Console.WriteLine("Espacios ocupados: " + espacios_ocupados);
+                    Console.WriteLine();
+
+                    int espacios_disponibles = capacidad - espacios_ocupados;
+                    Console.WriteLine("Espacios disponibles: " + espacios_disponibles);
+                    Console.WriteLine();
+
+                    Console.WriteLine("El tiempo simulado es de: " + tiempo_simulado + "minutos.");
+                    Console.WriteLine();
+
+                    Console.WriteLine("Dinero recaudado: " + dinero);
+                    Console.WriteLine();
+
+                    Console.WriteLine("Tickets cerrados : " + tickets_cerrados);
+                    Console.WriteLine();
+
+                    Console.WriteLine("Tickets creados: " + tickets_creados);
+                    Console.WriteLine();
 
                     Console.WriteLine("Presione Enter para continuar");
                     Console.ReadLine();
@@ -220,11 +244,50 @@ class Program
 
                 case 4:
 
+                    // Caso 4 - El operador simula el paso del tiempo
+
+                    Console.WriteLine("Ingrese la cantidad de minutos transcurridos desde la ultima actualización");
+                    int minutos_transcurridos = int.Parse(Console.ReadLine());
+
+                    tiempo_simulado += minutos_transcurridos;
+
+                    Console.WriteLine("El tiempo simulado es de: " + tiempo_simulado + " minutos.");
+
+                    if (ticket_activo_booleano == true) // Si hay un ticket activo,se muestra el tiempo que lleva estacionado y si se aplica multa o no
+                    {
+                        minutos_estacionados = tiempo_simulado - minuto_de_entrada;
+
+                        if (minutos_estacionados > 360)
+                        {
+                            if (minutos_estacionados > 720) //Advertencia de multa por más de 12 horas, multa del 20% al monto final
+                            {
+                                Console.WriteLine("El cliente lleva estacionado más de 12 horas, se le aplicará una multa del 20% al monto final");
+                            }
+                            else
+                            {
+                                Console.WriteLine("ADVERTENCIA, MULTA PROXIMA");
+                            }
+                        }
+                    }
+
                     Console.WriteLine("Presione Enter para continuar");
                     Console.ReadLine();
                     Console.Clear();
                     break;
             }
         } while (opcion_menu != 5);
+
+        // 5 - Resumen de turno
+        Console.WriteLine("RESUMEN FINAL DEL TURNO: ");
+        Console.WriteLine();
+        Console.WriteLine("Se crearon " + tickets_creados + "tickets.");
+        Console.WriteLine();
+        Console.WriteLine("Se cerraron " + tickets_cerrados + "tickets.");
+        Console.WriteLine();
+        Console.WriteLine("El dinero recaudado fue de: Q" + dinero);
+        Console.WriteLine();
+        Console.WriteLine("Se simularon " + tiempo_simulado + " minutos.");
+        Console.WriteLine();
+        Console.WriteLine("Gracias por usar el programa, presione Enter para salir");
     }
 }
