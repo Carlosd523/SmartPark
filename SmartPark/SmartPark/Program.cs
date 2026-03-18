@@ -290,5 +290,7 @@ class Program
         Console.WriteLine("Se simularon " + tiempo_simulado + " minutos.");
         Console.WriteLine();
         Console.WriteLine("Gracias por usar el programa, presione Enter para salir");
+        Console.Read();
+        Console.Clear();
     }
 }
