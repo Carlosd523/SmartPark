@@ -202,6 +202,7 @@ class Program
                         monto_final = 0;
                     }
 
+                    Console.WriteLine("Se cobraron Q" + monto_final);
                     dinero += monto_final;
                     tickets_cerrados++;
                     ticket_activo_booleano = false;
@@ -225,10 +226,10 @@ class Program
                     Console.WriteLine("Espacios disponibles: " + espacios_disponibles);
                     Console.WriteLine();
 
-                    Console.WriteLine("El tiempo simulado es de: " + tiempo_simulado + "minutos.");
+                    Console.WriteLine("El tiempo simulado es de: " + tiempo_simulado + " minutos.");
                     Console.WriteLine();
 
-                    Console.WriteLine("Dinero recaudado: " + dinero);
+                    Console.WriteLine("Dinero recaudado: Q" + dinero);
                     Console.WriteLine();
 
                     Console.WriteLine("Tickets cerrados : " + tickets_cerrados);
@@ -247,7 +248,7 @@ class Program
                     // Caso 4 - El operador simula el paso del tiempo
 
                     Console.WriteLine("Ingrese la cantidad de minutos transcurridos desde la ultima actualización");
-                    int minutos_transcurridos = int.Parse(Console.ReadLine());
+                    int minutos_transcurridos = int.Parse(Console.ReadLine()!);
 
                     tiempo_simulado += minutos_transcurridos;
 
@@ -280,9 +281,9 @@ class Program
         // 5 - Resumen de turno
         Console.WriteLine("RESUMEN FINAL DEL TURNO: ");
         Console.WriteLine();
-        Console.WriteLine("Se crearon " + tickets_creados + "tickets.");
+        Console.WriteLine("Se crearon " + tickets_creados + " tickets.");
         Console.WriteLine();
-        Console.WriteLine("Se cerraron " + tickets_cerrados + "tickets.");
+        Console.WriteLine("Se cerraron " + tickets_cerrados + " tickets.");
         Console.WriteLine();
         Console.WriteLine("El dinero recaudado fue de: Q" + dinero);
         Console.WriteLine();
