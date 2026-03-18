@@ -22,7 +22,9 @@ class Program
 
             if(codigo_turno.Length != 4)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Por favor ingrese un código de turno correcto");
+                Console.ResetColor();
             }
         } while (codigo_turno.Length != 4);
 
@@ -36,7 +38,9 @@ class Program
 
             if(capacidad < 10)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("El mínimo de capacidad debe de ser 10");
+                Console.ResetColor();
             }
         } while (capacidad < 10);
 
@@ -56,22 +60,26 @@ class Program
         int multa_fija = 0;
         int cliente_vip = 0;
         double monto_final;
+        int minutos_transcurridos = 0;
 
         // Menú - Hecho con ciclo do-while
 
         do
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("¿A qué parte del menú se quiere dirigir?" +
                 "\n 1 = CREAR TICKET DE ENTRADA" +
                 "\n 2 = REGISTRAR SALIDA Y CALCULAR COBRO" +
                 "\n 3 = VER ESTADO DE PARQUEO" +
                 "\n 4 = SIMULAR PASO DEL TIEMPO" +
                 "\n 5 = SALIR");
+            Console.ResetColor();
             string dato1 = Console.ReadLine()!;
             opcion_menu = int.Parse(dato1);
 
             if(opcion_menu < 1 || opcion_menu > 5)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ingrese una opción válida");
                 continue;
             }
@@ -85,6 +93,7 @@ class Program
                     int espacios_ocupados = tickets_creados - tickets_cerrados;
                     if(ticket_activo_booleano == true || espacios_ocupados == capacidad)
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("No se pueden crear tickets en este momento");
                         continue;
                     }
@@ -102,7 +111,9 @@ class Program
 
                         if(vehiculo > 3 || vehiculo < 1)
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Ingrese un número válido");
+                            Console.ResetColor();
                         }
                     } while (vehiculo > 3 || vehiculo < 1);
 
@@ -115,6 +126,10 @@ class Program
                     ticket_activo_booleano = true;
                     tickets_creados++;
 
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("El ticket ha sido creado exitosamente");
+                    Console.ResetColor();
+
                     Console.WriteLine("Presione Enter para continuar");
                     Console.ReadLine();
                     Console.Clear();
@@ -126,7 +141,11 @@ class Program
 
                     if(ticket_activo_booleano == false)
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("No hay tickets activos");
+                        Console.WriteLine("Presione Enter para continuar");
+                        Console.ReadLine();
+                        Console.Clear();
                         continue;
                     }
 
@@ -182,7 +201,9 @@ class Program
                             cliente_vip = int.Parse(dato4);
                             if(cliente_vip > 1 || cliente_vip < 0)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Ingrese un número válido");
+                                Console.ResetColor();
                                 continue;
                             }
                         } while (cliente_vip > 1 || cliente_vip < 0);
@@ -202,7 +223,9 @@ class Program
                         monto_final = 0;
                     }
 
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Se cobraron Q" + monto_final);
+                    Console.ResetColor();
                     dinero += monto_final;
                     tickets_cerrados++;
                     ticket_activo_booleano = false;
@@ -238,6 +261,10 @@ class Program
                     Console.WriteLine("Tickets creados: " + tickets_creados);
                     Console.WriteLine();
 
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Resumen visto exitosamente");
+                    Console.ResetColor();
+
                     Console.WriteLine("Presione Enter para continuar");
                     Console.ReadLine();
                     Console.Clear();
@@ -246,9 +273,19 @@ class Program
                 case 4:
 
                     // Caso 4 - El operador simula el paso del tiempo
+                    do
+                    {
+                        Console.WriteLine("Ingrese la cantidad de minutos transcurridos desde la ultima actualización");
+                        minutos_transcurridos = int.Parse(Console.ReadLine()!);
 
-                    Console.WriteLine("Ingrese la cantidad de minutos transcurridos desde la ultima actualización");
-                    int minutos_transcurridos = int.Parse(Console.ReadLine()!);
+                        if (minutos_transcurridos < 1 || minutos_transcurridos > 1440)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Ingrese una cantidad de minutos válida");
+                            Console.ResetColor();
+                        }
+                    } while (minutos_transcurridos < 1 || minutos_transcurridos > 1440);
+
 
                     tiempo_simulado += minutos_transcurridos;
 
@@ -270,6 +307,10 @@ class Program
                             }
                         }
                     }
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Tiempo simulado exitosamente");
+                    Console.ResetColor();
 
                     Console.WriteLine("Presione Enter para continuar");
                     Console.ReadLine();
