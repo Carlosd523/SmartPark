@@ -164,7 +164,7 @@ class Program
                             break;
 
                         case 3:
-                            tarifa = 15;
+                            tarifa = 12;
                             break;
                     }
 
@@ -210,7 +210,7 @@ class Program
 
                         if(cliente_vip == 1)
                         {
-                            monto_final = monto_final * 0.90;
+                            monto_final = monto_final * 0.50;
                         }
 
                         if(horas > 12)
